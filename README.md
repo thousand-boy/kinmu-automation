@@ -50,17 +50,19 @@ Python・OR-Tools・openpyxlを使用して、Excel形式の勤務表から勤�
 
 ~~~text
 kinmu-automation/
-├── input/
+├── input/                       # Git管理対象外
 │   └── kinmu_sample.xlsx
-│
-├── output/
+├── output/                      # Git管理対象外
 │   └── kinmu_output.xlsx
-│
+├── sample/
+│   └── kinmu_sample.xlsx        # GitHub公開用サンプル
 ├── src/
 │   └── main.py
-│
-├── requirements.txt
+├── tests/
+│   └── test_main.py
 ├── .gitignore
+├── requirements.txt
+├── requirements-dev.txt
 └── README.md
 ~~~
 
@@ -512,35 +514,73 @@ openpyxlはExcel数式自体を計算しないため、出力ファイルをExce
 
 macOS / Linux：
 
-~~~bash
+```bash
 source .venv/bin/activate
-~~~
+```
 
 Windows：
 
-~~~powershell
+```powershell
 .venv\Scripts\activate
-~~~
+```
 
 ### 必要なライブラリをインストール
 
-~~~bash
+```bash
 python -m pip install -r requirements.txt
-~~~
+```
+
+### サンプル勤務表を入力フォルダへコピー
+
+GitHubでは実際の勤務表を公開せず、匿名化したサンプルデータを `sample/` フォルダに保存しています。
+
+初回実行時は、以下のコマンドでサンプル勤務表を `input/` フォルダへコピーしてください。
+
+macOS / Linux：
+
+```bash
+mkdir -p input
+cp sample/kinmu_sample.xlsx input/kinmu_sample.xlsx
+```
+
+Windows PowerShell：
+
+```powershell
+New-Item -ItemType Directory -Force input
+Copy-Item sample\kinmu_sample.xlsx input\kinmu_sample.xlsx
+```
+
+`input/` フォルダは `.gitignore` の対象としているため、実際の勤務表などの個人情報を含むファイルがGitHubへ公開されることを防いでいます。
 
 ### 実行
 
-~~~bash
+```bash
 python src/main.py
-~~~
+```
 
 正常に終了すると、
 
-~~~text
+```text
 output/kinmu_output.xlsx
-~~~
+```
 
 が作成されます。
+
+### 実行時の流れ
+
+```text
+sample/kinmu_sample.xlsx
+        ↓
+input/kinmu_sample.xlsx
+        ↓
+Pythonで勤務表を読み込み
+        ↓
+OR-Toolsで勤務を最適化
+        ↓
+output/kinmu_output.xlsx
+```
+
+`sample/` はGitHub公開用の匿名データ、`input/` は実際にプログラムが読み込むファイル、`output/` は生成された勤務表の保存先として役割を分けています。
 
 ---
 
