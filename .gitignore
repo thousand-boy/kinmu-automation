@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Virtual environment
+.venv/
+venv/
+
+# macOS
+.DS_Store
+
+# VS Code
+.vscode/
+
+# Private input files
+input/
+
+# Generated output files
+output/
+
+# Excel temporary files
+*.tmp.xlsx
+~$*.xlsx
+
+# Logs
+*.log
