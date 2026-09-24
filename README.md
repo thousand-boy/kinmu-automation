@@ -1,5 +1,7 @@
 # 勤務表作成支援ツール
 
+[![Python Tests](https://github.com/thousand-boy/kinmu-automation/actions/workflows/pytest.yml/badge.svg)](https://github.com/thousand-boy/kinmu-automation/actions/workflows/pytest.yml)
+
 Python・Google OR-Tools・openpyxlを使用し、Excel形式の勤務表から勤務希望や必要休日日数を読み取り、複数の勤務条件を考慮しながら勤務配置を自動調整するツールです。
 
 本ツールは、勤務表を完全自動で完成させることを目的としたものではありません。
